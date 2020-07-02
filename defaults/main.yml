@@ -1,0 +1,5 @@
+###  vars file for ansible-zabbix-server
+
+## OS and version
+
+  zabbix40sv_OS_Version: RedHat7

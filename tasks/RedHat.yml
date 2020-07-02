@@ -1,0 +1,50 @@
+---
+# 各サービスの起動設定
+
+# DBサービス自動起動
+
+  - name: mariadb service chkconfig setting
+    service: name=mariadb enabled={{ VAR_Zabbix40SV_chkconfig_mysqld }}
+    when:
+      - VAR_Zabbix40SV_chkconfig_mysqld is defined
+      - VAR_Zabbix40SV_chkconfig_mysqld in [True,False]
+
+# Apacheサービス自動起動
+
+  - name: httpd service chkconfig setting
+    service: name=httpd enabled={{ VAR_Zabbix40SV_chkconfig_httpd }}
+    when:
+      - VAR_Zabbix40SV_chkconfig_httpd is defined
+      - VAR_Zabbix40SV_chkconfig_httpd in [True,False]
+
+# Zabbixサービス自動起動
+
+  - name: zabbix service chkconfig setting
+    service: name=zabbix-server enabled={{ VAR_Zabbix40SV_chkconfig_zabbixserver }}
+    when:
+      - VAR_Zabbix40SV_chkconfig_zabbixserver is defined
+      - VAR_Zabbix40SV_chkconfig_zabbixserver in [True,False]
+
+# DBサービス起動
+
+  - name: mariadb service start
+    service: name=mariadb state=restarted
+    when:
+      - VAR_Zabbix40SV_start_mysqld is defined
+      - VAR_Zabbix40SV_start_mysqld == "start"
+
+# Apacheサービス起動
+
+  - name: httpd service start
+    service: name=httpd state=restarted
+    when:
+      - VAR_Zabbix40SV_start_httpd is defined
+      - VAR_Zabbix40SV_start_httpd == "start"
+
+# Zabbixサービス起動
+
+  - name: zabbix service start
+    service: name=zabbix-server state=restarted
+    when:
+      - VAR_Zabbix40SV_start_zabbixserver is defined
+      - VAR_Zabbix40SV_start_zabbixserver == "start"
